@@ -11,10 +11,14 @@ Start the nginx server:
 nginx config: /usr/local/etc/nginx/servers/afi.conf
 
 server {
-    listen 8080;
+    listen 8080 default_server;
     server_name afi.hacksbrain.com;
 
-    location / {
+    location = / {
+        return 301 $scheme://$host:$server_port/api/v1/resources/all;
+    }
+
+    location /api/v1/resources/all {
         include proxy_params;
         proxy_pass http://unix:/usr/local/var/run/afi.sock;
     }

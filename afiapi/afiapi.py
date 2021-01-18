@@ -11,12 +11,12 @@ afi = AFITop100()
 afi.scrape_afi_list()
 
 
-@app.route("/", methods=["GET"])
-def home():
-    return redirect("/api/v1/resources/afitop100/all", code=301)
+# @app.route("/", methods=["GET"])
+# def home():
+#     return redirect("/api/v1/resources/afitop100/all", code=301)
 
 
-@app.route("/api/v1/resources/afitop100/all", methods=["GET"])
+@app.route("/api/v1/resources/all", methods=["GET"])
 def api_all():
     return jsonify(afi.afi_list)
 
