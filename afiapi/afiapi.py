@@ -11,11 +11,6 @@ afi = AFITop100()
 afi.scrape_afi_list()
 
 
-# @app.route("/", methods=["GET"])
-# def home():
-#     return redirect("/api/v1/resources/afitop100/all", code=301)
-
-
 @app.route("/api/v1/resources/all", methods=["GET"])
 def api_all():
     return jsonify(afi.afi_list)
@@ -27,4 +22,4 @@ def page_not_found(e):
 
 
 if __name__ == "__main__":
-    app.run(use_reloader=False, host="0.0.0.0")
+    app.run(use_reloader=False, host="0.0.0.0", port=8080)
