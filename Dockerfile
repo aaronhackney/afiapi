@@ -18,15 +18,15 @@ CMD ["gunicorn", "-w", "3", "-b", "0.0.0.0:8080", "--access-logfile", "/afiapi/l
 FROM nginx
 
 # Set the environment variables in the containter
-ENV NGINX_HOST_NAME NGINX_HOST_NAME
-ENV NGINX_PORT NGINX_PORT
-ENV BACKEND_HOSTNAME BACKEND_HOSTNAME
-ENV BACKEND_PORT BACKEND_PORT
+ENV NGINX_HOST_NAME $NGINX_HOST_NAME
+ENV NGINX_PORT $NGINX_PORT
+ENV BACKEND_HOSTNAME $BACKEND_HOSTNAME
+ENV BACKEND_PORT $BACKEND_PORT
 
 # Copy the TLS certificate and key to the container
 RUN mkdir -p /etc/certs
-COPY TLS_CERT_FILE /etc/certs/cert.pem
-COPY TLS_KEY_FILE /etc/certs/key.pem
+COPY $TLS_CERT_FILE /etc/certs/cert.pem
+COPY $TLS_KEY_FILE /etc/certs/key.pem
 
 # Copy the nginx config file to the container
 COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf.template
