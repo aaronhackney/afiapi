@@ -17,6 +17,14 @@ CMD ["gunicorn", "-w", "3", "-b", "0.0.0.0:8080", "--access-logfile", "/afiapi/l
 # --build-arg 8080 (the listening port of the backend flask server)
 FROM nginx
 
+# Make the --build-arg vaules available to the build system
+ARG NGINX_HOST_NAME
+ARG NGINX_PORT
+ARG BACKEND_HOSTNAME
+ARG BACKEND_PORT
+ARG TLS_CERT_FILE
+ARG TLS_KEY_FILE
+
 # Set the environment variables in the containter
 ENV NGINX_HOST_NAME $NGINX_HOST_NAME
 ENV NGINX_PORT $NGINX_PORT
