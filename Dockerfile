@@ -31,8 +31,9 @@ COPY $TLS_KEY_FILE /etc/certs/key.pem
 # Copy the nginx config file to the container
 COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf.template
 
-# Copy the nginx configuration script to the container 
+# Copy the nginx configuration script to the container and make it executable
 COPY ./nginx/docker-entrypoint.sh /
+RUN ["chmod", "+x", "/docker-entrypoint.sh"]
 
 # Run the nginx configuration script
 ENTRYPOINT ["/docker-entrypoint.sh"]
