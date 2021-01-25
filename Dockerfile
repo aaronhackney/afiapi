@@ -43,5 +43,5 @@ RUN ["chmod", "+x", "/docker-entrypoint.sh"]
 # Run the nginx configuration script
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
-# start the nginx container
+# start the nginx daemon
 CMD ["nginx", "-g", "daemon off;"]
