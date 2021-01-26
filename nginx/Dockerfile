@@ -18,6 +18,8 @@ ENV TLS_CERT_FILE $TLS_CERT_FILE
 ENV TLS_KEY_FILE $TLS_KEY_FILE
 ENV TLS_CERT_PATH $TLS_CERT_PATH
 
+RUN ["echo", "test", "$TLS_CERT_PATH"]
+
 # Copy the nginx config file to the container
 COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf.template
 
