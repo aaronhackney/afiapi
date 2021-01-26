@@ -5,7 +5,7 @@ services:
     container_name: afiapi
     build: ./afiapi
     ports:
-      - "8080:8080"
+      - "${BACKEND_PORT}:${BACKEND_PORT}"
   nginx:
     depends_on:
       - afiapi
@@ -20,12 +20,12 @@ services:
         BACKEND_PORT: ${BACKEND_PORT}
     volumes:
       - ${TLS_CERT_PATH}:/etc/certs
-    image: docker.hacksbrain.com:5005/afiapi:1.0.2
+    image: ${REGISTRY}/${IMAGE_NAME}:${IMAGE_VERSION}
     container_name: nginx
     ports:
-      - "8443:8443"
+      - "${NGINX_PORT}:${NGINX_PORT}"
     restart: always
 networks:
   default:
     external:
-      name: MORTY-NET
+      name: ${DOCKER_NET}

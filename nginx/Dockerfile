@@ -1,12 +1,3 @@
-
-
-# --build-arg /etc/letsencrypt/live/afi.hacksbrain.com/fullchain.pem (TLS certificate file on the build machine)
-# --build-arg /etc/letsencrypt/live/afi.hacksbrain.com/privkey.pem (TLS key file on the build machine)
-# --build-arg afi.hacksbrain.com (the hostname of the nginx listening server)
-# --build-arg 8443 (\the listening port of the nginx listening server)
-# --build-arg afiapi (the hostname or ip of the backend flask server - could be a docker container --name)
-# --build-arg 8080 (the listening port of the backend flask server)
-
 FROM nginx
 
 # Make the --build-arg vaules available to the build system
