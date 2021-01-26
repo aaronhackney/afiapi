@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+  afiapi:
+    container_name: afiapi
+    build: ./afiapi
+    ports:
+      - "8080:8080"
+  nginx:
+    depends_on:
+      - afiapi
+    build:
+      context: ./nginx
+      args:
+        TLS_CERT_FILE: ${TLS_CERT_FILE}
+        TLS_KEY_FILE: ${TLS_KEY_FILE}
+        NGINX_HOST_NAME: ${NGINX_HOST_NAME}
+        NGINX_PORT: ${NGINX_PORT}
+        BACKEND_HOSTNAME: ${BACKEND_HOSTNAME}
+        BACKEND_PORT: ${BACKEND_PORT}
+    volumes:
+      - ${TLS_CERT_PATH}:/etc/certs
+    image: docker.hacksbrain.com:5005/afiapi:1.0.2
+    container_name: nginx
+    ports:
+      - "8443:8443"
+    restart: always
+networks:
+  default:
+    external:
+      name: MORTY-NET

@@ -1,12 +1,3 @@
-FROM python:3.9
-RUN mkdir -p /afiapi
-RUN mkdir -p /afiapi/log
-COPY . /afiapi
-WORKDIR /afiapi/afiapi
-RUN pip3 install -r /afiapi/requirements.txt
-EXPOSE 8080
-CMD ["gunicorn", "-w", "3", "-b", "0.0.0.0:8080", "--access-logfile", "/afiapi/log/access", "--error-logfile", \
-    "/afiapi/log/error", "wsgi:app"]
 
 
 # --build-arg /etc/letsencrypt/live/afi.hacksbrain.com/fullchain.pem (TLS certificate file on the build machine)
@@ -15,6 +6,7 @@ CMD ["gunicorn", "-w", "3", "-b", "0.0.0.0:8080", "--access-logfile", "/afiapi/l
 # --build-arg 8443 (\the listening port of the nginx listening server)
 # --build-arg afiapi (the hostname or ip of the backend flask server - could be a docker container --name)
 # --build-arg 8080 (the listening port of the backend flask server)
+
 FROM nginx
 
 # Make the --build-arg vaules available to the build system
