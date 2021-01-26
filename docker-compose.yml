@@ -12,6 +12,7 @@ services:
     build:
       context: ./nginx
       args:
+        TLS_CERT_ARCHIVE_PATH: ${TLS_CERT_ARCHIVE_PATH}
         TLS_CERT_FILE: ${TLS_CERT_FILE}
         TLS_KEY_FILE: ${TLS_KEY_FILE}
         NGINX_HOST_NAME: ${NGINX_HOST_NAME}
@@ -19,7 +20,11 @@ services:
         BACKEND_HOSTNAME: ${BACKEND_HOSTNAME}
         BACKEND_PORT: ${BACKEND_PORT}
     volumes:
-      - ${TLS_CERT_PATH}:/etc/certs
+      # Certbot puts the cert in an archive with a changing name, however the symlink in the ${TLS_CERT_PATH} is
+      # constant, so we point nginx to the symlink but we also need to mount the real volume that the symlink points
+      # to read the actual file.
+      - ${TLS_CERT_PATH}:${TLS_CERT_PATH}
+      - ${TLS_CERT_ARCHIVE_PATH}:${TLS_CERT_ARCHIVE_PATH}
     image: ${REGISTRY}/${IMAGE_NAME}:${IMAGE_VERSION}
     container_name: nginx
     ports:
