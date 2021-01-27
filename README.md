@@ -19,7 +19,7 @@ In the file .env please configure the following to your liking
 `BACKEND_HOSTNAME=afiapi` - The docker container name to use for the flask/api container
 `BACKEND_PORT=8080` - The port that the flask/api container on which to listen for connections from nginx  
 `DOCKER_NET=MORTY-NET` - This is the name of an existing network on the host docker system  
-`IMAGE_NAME=afiapi` The name of the flask/api container (TODO This is a repeat of BACKEND_HOSTNAME)  
+`IMAGE_NAME=afiapi` The name of the flask/api container we are building and pushing to the registry
 `IMAGE_VERSION=1.0.2` The version of your container deployment. Not critical  
 `REGISTRY=docker.hacksbrain.com:5005` The hostname and port your registry server listens on  
 
