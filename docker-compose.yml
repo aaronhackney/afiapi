@@ -6,6 +6,7 @@ services:
     build: ./afiapi
     ports:
       - "${BACKEND_PORT}:${BACKEND_PORT}"
+    restart: always
   nginx:
     depends_on:
       - afiapi
